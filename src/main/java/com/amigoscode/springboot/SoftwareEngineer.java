@@ -1,9 +1,6 @@
 package com.amigoscode.springboot;
 
-import jakarta.persistence.Entity;
-import jakarta.persistence.GeneratedValue;
-import jakarta.persistence.GenerationType;
-import jakarta.persistence.Id;
+import jakarta.persistence.*;
 
 import java.util.Objects;
 
@@ -16,14 +13,30 @@ public class SoftwareEngineer {
     private String name;
     private String techStack;
 
+    public String getLearningPathRecommendation() {
+        return learningPathRecommendation;
+    }
+
+    public void setLearningPathRecommendation(String learningPathRecommendation) {
+        this.learningPathRecommendation = learningPathRecommendation;
+    }
+
+    @Column(columnDefinition = "TEXT")
+    private String learningPathRecommendation;
+
     protected SoftwareEngineer() {
         // Required by JPA
     }
 
-    public SoftwareEngineer(String name, Integer id, String techStack) {
+    public SoftwareEngineer(
+            String name,
+            Integer id,
+            String techStack,
+            String learningPathRecommendation) {
         this.name = name;
         this.id = id;
         this.techStack = techStack;
+        this.learningPathRecommendation = learningPathRecommendation;
     }
 
     public String getName() {
@@ -54,11 +67,11 @@ public class SoftwareEngineer {
     public boolean equals(Object o) {
         if (o == null || getClass() != o.getClass()) return false;
         SoftwareEngineer that = (SoftwareEngineer) o;
-        return Objects.equals(name, that.name) && Objects.equals(id, that.id) && Objects.equals(techStack, that.techStack);
+        return Objects.equals(id, that.id) && Objects.equals(name, that.name) && Objects.equals(techStack, that.techStack) && Objects.equals(learningPathRecommendation, that.learningPathRecommendation);
     }
 
     @Override
     public int hashCode() {
-        return Objects.hash(name, id, techStack);
+        return Objects.hash(id, name, techStack, learningPathRecommendation);
     }
 }
