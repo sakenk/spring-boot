@@ -1,12 +1,24 @@
 package com.amigoscode.springboot;
 
+import jakarta.persistence.Entity;
+import jakarta.persistence.GeneratedValue;
+import jakarta.persistence.GenerationType;
+import jakarta.persistence.Id;
+
 import java.util.Objects;
 
+@Entity
 public class SoftwareEngineer {
 
-    private String name;
+    @Id
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Integer id;
+    private String name;
     private String techStack;
+
+    protected SoftwareEngineer() {
+        // Required by JPA
+    }
 
     public SoftwareEngineer(String name, Integer id, String techStack) {
         this.name = name;
